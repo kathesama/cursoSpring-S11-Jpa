@@ -2,7 +2,7 @@ spring:
   main:
     log-startup-info: false
   application:
-    name: hexarchitecture-service
+    name: cursoSpring-S11-Jpa-relationship
   jackson:
     default-property-inclusion: non_null
     property-naming-strategy: SNAKE_CASE
@@ -16,6 +16,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+#    properties:
+#      hibernate:
+#        enable_lazy_load_no_trans: true
 logging:
   level:
     org.hibernate.SQL: debug

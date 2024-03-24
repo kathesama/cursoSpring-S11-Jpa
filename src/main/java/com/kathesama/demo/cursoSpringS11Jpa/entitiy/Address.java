@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -13,18 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name="invoices")
-public class Invoice {
+@Table(name="addresses")
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id") // si tiene la configuración por default no hace falta, acá lo dejamos
-    private Client client;
-
-    private String description;
-    private Double total;
+    private String street;
+    private Integer number;
 
     @CreationTimestamp
     @Column(name = "create_at")
@@ -34,8 +31,20 @@ public class Invoice {
     @Column(name = "updated_at")
     private Date updatedAt; // Se actualizará automáticamente al modificar la entidad
 
-    public Invoice(String description, Double total) {
-        this.description = description;
-        this.total = total;
+    public Address(String street, Integer number) {
+        this.street = street;
+        this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address address)) return false;
+        return Objects.equals(id, address.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
